@@ -24,14 +24,8 @@
  * For more information, refer to the checkout API documentation: https://docs.adyen.com/developers/checkout/api-reference-checkout */
 class Order
 {
-    /** @int value - Put the value into minor units 120 = 1.20 (for USD), for decimal information per currency see: https://docs.adyen.com/developers/currency-codes */
-    public $value = 120;
-
-    /** @var  $currencyCode - Change this to any currency you support: https://docs.adyen.com/developers/currency-codes */
-    public $currencyCode = 'USD';
-
     /** @array $amount - Amount is a combination of value and currency */
-    public $amount = ['value' => 120, 'currency' => "USD"];
+    public $amount = ['value' => 19123, 'currency' => "EUR"];
 
     public function getAmount()
     {
@@ -54,7 +48,7 @@ class Order
         return $this->shopperReference;
     }
 
-    /** @var $shopperLocale - The shopper locale : https://docs.adyen.com/developers/in-app-integration/checkout-api-reference/setup */
+    /** @var $shopperLocale - The shopper locale : https://docs.adyen.com/developers/in-app-integration/checkout-api-reference/paymentSession */
     public $shopperLocale = 'en_US';
 
     public function getShopperLocale()
@@ -63,7 +57,7 @@ class Order
     }
 
     /** @var $countryCode - The countryCode influences the returned payment methods */
-    public $countryCode = 'FR';
+    public $countryCode = 'DE';
 
     public function getCountryCode()
     {
@@ -78,11 +72,12 @@ class Order
         return $this->channel;
     }
 
-    public $html = true;
+    public $sdkVersion = "1.3.0";
 
-    public function getHtml()
+    public function getSDKVersion() 
     {
-        return $this->html;
+        return $this->sdkVersion;
     }
+
 
 }

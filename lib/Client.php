@@ -24,21 +24,26 @@ require_once __DIR__ . '/Config.php';
 class Client
 {
 
-    public function setup()
+    public function paymentSession()
     {
         $order = new Order();
         $authentication = Config::getAuthentication();
-        $url = Config::getSetupUrl();
+        $url = Config::getPaymentSessionUrl();
         $request = array(
             /** All order specific settings can be found in payment/Order.php */
 
             'amount' => $order->getAmount(),
             'channel' => $order->getChannel(),
             'countryCode' => $order->getCountryCode(),
-            'html' => $order->getHtml(),
             'shopperReference' => $order->getShopperReference(),
             'shopperLocale' => $order->getShopperLocale(),
             'reference' => $order->getReference(),
+            'sdkVersion' => $order-> getSDKVersion(),
+
+            /** Enable / Disable RECURRING **/
+            'enableOneClick' => 'true',
+            'enableRecurring' => 'true',
+
 
             /** All server specific settings can be found in config/Config.php */
 
@@ -55,9 +60,9 @@ class Client
 
     }
 
-    public function verify($data)
+    public function paymentResult($data)
     {
-        $url = Config::getVerifyUrl();
+        $url = Config::getPaymentsResultUrl();
         $authentication = Config::getAuthentication();
         return $this->doPostRequest($url, $data, $authentication);
     }

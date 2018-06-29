@@ -33,8 +33,8 @@ date_default_timezone_set("Europe/Amsterdam");
     <title>Example PHP checkout</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript"
-            src="https://checkoutshopper-test.adyen.com/checkoutshopper/assets/js/sdk/checkoutSDK.1.2.3.min.js"></script>
-    <script src="assets/js/setupCall.js" type="text/javascript"></script>
+            src="https://checkoutshopper-test.adyen.com/checkoutshopper/assets/js/sdk/checkoutSDK.1.3.0.min.js"></script>
+    <script src="assets/js/PaymentSessionCall.js" type="text/javascript"></script>
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body class="body">
@@ -63,30 +63,36 @@ date_default_timezone_set("Europe/Amsterdam");
         </div>
     </div>
 </div>
-<?php
-$client = new Client();
-$setupData = json_encode($client->setup());
+
+    <?php
+    $client = new Client();
+    $paymentSessionData = json_encode($client->paymentSession());
+    ?>
 
 
-?>
 <script type="text/javascript">
     $(document).ready(function () {
-        var data = <?php echo $setupData ?>;
-        initiateCheckout(data);
+
+        var data = JSON.parse(<?php echo $paymentSessionData ?>);
+        initiateCheckout(data['paymentSession']);
+
         chckt.hooks.beforeComplete = function (node, paymentData) {
             // `node` is a reference to the Checkout container HTML node.
             // `paymentData` is the result of the payment. Includes the `payload` variable,
-            // which you should submit to the server for the Checkout API /verify call.
+            // which you should submit to the server for the Checkout API /paymentsResult call.
+
             $.ajax({
-                url: 'verify.php',
-                data: {payloadData: paymentData},
+                url: 'paymentsResult.php',
+                data: paymentData,
                 method: 'POST',// jQuery > 1.9
                 type: 'POST', //jQuery < 1.9
                 success: function (data) {
+                    console.log("SUCCESS")
                     $("#checkout").html(data.authResponse);
                 },
                 error: function () {
                     if (window.console && console.log) {
+                        console.log("error")
                         console.log('### adyenCheckout::error:: args=', arguments);
                     }
                 }
@@ -96,5 +102,6 @@ $setupData = json_encode($client->setup());
         };
     });
 </script>
+
 </body>
 </html>

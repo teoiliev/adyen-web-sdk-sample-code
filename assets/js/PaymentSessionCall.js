@@ -59,11 +59,11 @@ var configurationObject = {
 //////////////////////////////////////// INITIALIZE CHECKOUT ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
- * @function Renders the JSON response from the 'setup' call as a fully functioning Checkout page
+ * @function Renders the JSON response from the 'PaymentSession' call as a fully functioning Checkout page
  *
  * Uses the 'checkout' property on the global var 'chckt' which is created when checkoutSDK.min.js is loaded
  *
- * @param jsonResponseObject - the JSON response from the 'setup' call to the Adyen CheckoutAPI
+ * @param jsonResponseObject - the JSON response from the 'PaymentSession' call to the Adyen CheckoutAPI
  */
 function initiateCheckout(jsonResponse) {
     var checkout = chckt.checkout(jsonResponse, '.checkout', configurationObject);
