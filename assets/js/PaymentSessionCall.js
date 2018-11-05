@@ -35,7 +35,7 @@ var securedFieldsStyles = {
     }
 };
 
-// You are able to overwrite any language string per locale, by sending in a translationUbject see https://docs.adyen.com/developers/checkout/web-sdk/custom-checkout-web/translations
+// You are able to overwrite any language string per locale, by sending in a translationUbject see https://docs.adyen.com/developers/checkout/web-sdk/customization/localization
 var translationObject = {
     "paymentMethods.moreMethodsButton": {
         "en-US": "Other payment methods",
@@ -43,14 +43,22 @@ var translationObject = {
     }
 };
 
-// For a full reference of configurable options, view https://docs.adyen.com/developers/checkout/web-sdk/custom-checkout-web/sdk-configuration
-var configurationObject = {
+// For a full reference of configurable options, view https://docs.adyen.com/developers/checkout/web-sdk/customization/settings
+const configurationObject = {
+    autoFocusOnLoad: true,
+    consolidateCards: true,
     context: 'test',
+    initialPMCount: 5, // Overwrites the initial amount of payment methods shown
     translations: translationObject,
+    allowAddedLocales: false, // Allows you to add a locale
     paymentMethods: {
         card: {
             sfStyles: securedFieldsStyles,
-            showOptionalHolderNameField: true
+            separateDateInputs: false,
+            placeholders: {
+                encryptedSecurityCode: '1111',
+                encryptedExpiryDate: '02/12'
+            }
         }
     }
 };

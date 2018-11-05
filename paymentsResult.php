@@ -24,5 +24,5 @@ require_once __DIR__ . '/lib/Client.php';
 header("Content-type: application/json");
 
 $client = new Client();
-$data = json_encode($_POST['paymentData']);
+$data = $_POST['payload'];
 echo $client->paymentResult($data);

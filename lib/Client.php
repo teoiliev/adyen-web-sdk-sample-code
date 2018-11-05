@@ -64,7 +64,12 @@ class Client
     {
         $url = Config::getPaymentsResultUrl();
         $authentication = Config::getAuthentication();
-        return $this->doPostRequest($url, $data, $authentication);
+        $data = array(
+            'payload' => $data
+        );
+
+        $jsonString = json_encode($data);
+        return $this->doPostRequest($url, $jsonString, $authentication);
     }
 
     /** Set up the cURL call to  adyen */

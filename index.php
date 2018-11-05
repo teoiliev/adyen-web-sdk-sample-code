@@ -33,7 +33,7 @@ date_default_timezone_set("Europe/Amsterdam");
     <title>Example PHP checkout</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript"
-            src="https://checkoutshopper-test.adyen.com/checkoutshopper/assets/js/sdk/checkoutSDK.1.3.0.min.js"></script>
+            src="https://checkoutshopper-test.adyen.com/checkoutshopper/assets/js/sdk/checkoutSDK.1.6.4.min.js"></script>
     <script src="assets/js/PaymentSessionCall.js" type="text/javascript"></script>
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -72,23 +72,26 @@ date_default_timezone_set("Europe/Amsterdam");
 
 <script type="text/javascript">
     $(document).ready(function () {
-
         var data = JSON.parse(<?php echo $paymentSessionData ?>);
         initiateCheckout(data['paymentSession']);
 
         chckt.hooks.beforeComplete = function (node, paymentData) {
+            console.log(paymentData.payload);
+
+            var payloadObject = {
+                payload: paymentData.payload
+            };
+
             // `node` is a reference to the Checkout container HTML node.
             // `paymentData` is the result of the payment. Includes the `payload` variable,
             // which you should submit to the server for the Checkout API /paymentsResult call.
-
             $.ajax({
                 url: 'paymentsResult.php',
-                data: paymentData,
+                data: payloadObject,
                 method: 'POST',// jQuery > 1.9
                 type: 'POST', //jQuery < 1.9
                 success: function (data) {
-                    console.log("SUCCESS")
-                    $("#checkout").html(data.authResponse);
+                    $("#checkout").html(data.resultCode);
                 },
                 error: function () {
                     if (window.console && console.log) {
