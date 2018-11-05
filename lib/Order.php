@@ -78,6 +78,4 @@ class Order
     {
         return $this->sdkVersion;
     }
-
-
 }
