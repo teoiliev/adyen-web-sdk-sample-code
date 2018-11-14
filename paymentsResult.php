@@ -25,7 +25,5 @@ header("Content-type: application/json");
 
 $client = new Client();
 
-$request['payload'] = $_POST['payload'];
-
-$data = json_encode($request);
+$data = $_POST['payload'];
 echo $client->paymentResult($data);
