@@ -75,6 +75,7 @@ class Client
     /** Set up the cURL call to  adyen */
     private function doPostRequest($url, $data, $authentication)
     {
+		try{
         //  Initiate curl
         $curlAPICall = curl_init();
 
@@ -101,9 +102,19 @@ class Client
 
         // Execute
         $result = curl_exec($curlAPICall);
+		
+		// Error Check
+		if ($result === false){
+		  throw new Exception(curl_error($curlAPICall), curl_errno($curlAPICall));
+		}
 
         // Closing
         curl_close($curlAPICall);
+		} catch (Exception $e) {
+		  trigger_error(sprintf(
+				  'API call failed with error #%d, %s', $e->getCode(), $e->getMessage()
+				  ), E_USER_ERROR);
+		}
 
         // When this file gets called by javascript or another language, it will respond with a json object
         return $result;
