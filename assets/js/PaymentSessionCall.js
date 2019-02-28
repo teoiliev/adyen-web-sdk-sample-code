@@ -43,6 +43,10 @@ var translationObject = {
     }
 };
 
+var sdkConfigObj = {
+   context : 'test' // change this to 'live' when you go live.
+};
+ 
 // For a full reference of configurable options, view https://docs.adyen.com/developers/checkout/web-sdk/customization/settings
 const configurationObject = {
     autoFocusOnLoad: true,
@@ -50,17 +54,7 @@ const configurationObject = {
     context: 'test',
     initialPMCount: 5, // Overwrites the initial amount of payment methods shown
     translations: translationObject,
-    allowAddedLocales: false, // Allows you to add a locale
-    paymentMethods: {
-        card: {
-            sfStyles: securedFieldsStyles,
-            separateDateInputs: false,
-            placeholders: {
-                encryptedSecurityCode: '1111',
-                encryptedExpiryDate: '02/12'
-            }
-        }
-    }
+    allowAddedLocales: false // Allows you to add a locale
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
