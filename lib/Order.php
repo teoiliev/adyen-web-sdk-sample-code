@@ -25,7 +25,7 @@
 class Order
 {
     /** @array $amount - Amount is a combination of value and currency */
-    public $amount = ['value' => 19123, 'currency' => "EUR"];
+    public $amount = ['value' => 2000, 'currency' => "EUR"];
 
     public function getAmount()
     {
@@ -72,7 +72,7 @@ class Order
         return $this->channel;
     }
 
-    public $sdkVersion = "1.6.4";
+    public $sdkVersion = "1.9.2";
 
     public function getSDKVersion()
     {
