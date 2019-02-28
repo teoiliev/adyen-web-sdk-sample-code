@@ -21,7 +21,7 @@ These variables can be found in Adyen Customer Area. For more information, visit
 You can install this example in two ways:
 
 Use this shortcut to deploy to Heroku:<br/>
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Adyen/adyen-web-sdk-sample-code)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/teoiliev/adyen-web-sdk-sample-code)
   
 Alternatively, clone this repository and deploy it to your own PHP server.
 
